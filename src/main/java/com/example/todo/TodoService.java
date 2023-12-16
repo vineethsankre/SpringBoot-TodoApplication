@@ -15,6 +15,7 @@ import javax.validation.OverridesAttribute;
 public class TodoService implements TodoRepository {
 
     private static HashMap<Integer, Todo> todoList = new HashMap<>();
+    int uniqueId = 6;
 
     public TodoService() {
         todoList.put(1, new Todo(1, "Watch Movie", "LOW", "TO DO"));
@@ -33,11 +34,18 @@ public class TodoService implements TodoRepository {
     }
 
     @Override
-    public Todo getTodoById(int id){
+    public Todo getTodoById(int id) {
         Todo todo = todoList.get(id);
-        if (todo == null){
+        if (todo == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+        return todo;
+    }
+
+    @Override 
+    public Todo addTodo(Todo todo){
+        todo.setId(uniqueId);
+        todoList.put(uniqueId, todo);
         return todo;
     }
 

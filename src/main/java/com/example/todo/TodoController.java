@@ -12,8 +12,14 @@ public class TodoController {
     public ArrayList<Todo> addTodo() {
         return todoService.addTodo();
     }
+
     @GetMapping("/todos/{id}")
-    public Todo getTodoById(@PathVariable("id") int id){
+    public Todo getTodoById(@PathVariable("id") int id) {
         return todoService.getTodoById(id);
+    }
+
+    @PostMapping("/todos")
+    public Todo addTodo(@RequestBody Todo todo){
+        return todoService.addTodo(todo);
     }
 }
