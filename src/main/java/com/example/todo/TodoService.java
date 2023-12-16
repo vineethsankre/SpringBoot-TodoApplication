@@ -1,17 +1,14 @@
-/*
- * You can use the following import statements
- * 
- * import org.springframework.web.server.ResponseStatusException;
- * import org.springframework.http.HttpStatus;
- * 
- */
-
 package com.example.todo;
+
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import com.example.todo.Todo;
 import com.example.todo.TodoRepository;
 
 import java.util.*;
+
+import javax.validation.OverridesAttribute;
 
 // Do not modify the below code
 
@@ -28,8 +25,20 @@ public class TodoService implements TodoRepository {
 
     }
 
-    // Do not modify the above code
+    @Override
+    public ArrayList<Todo> addTodo() {
+        Collection<Todo> todoCollection = todoList.values();
+        ArrayList<Todo> todo = new ArrayList<>(todoCollection);
+        return todo;
+    }
 
-    // Write your code here
+    @Override
+    public Todo getTodoById(int id){
+        Todo todo = todoList.get(id);
+        if (todo == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return todo;
+    }
 
 }
