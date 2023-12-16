@@ -19,7 +19,11 @@ public class TodoController {
     }
 
     @PostMapping("/todos")
-    public Todo addTodo(@RequestBody Todo todo){
+    public Todo addTodo(@RequestBody Todo todo) {
         return todoService.addTodo(todo);
+    }
+    @PutMapping("/todos/{id}")
+    public Todo updateTodo(@PathVariable int id, @RequestBody Todo todo){
+        return todoService.updateTodo(id, todo);
     }
 }

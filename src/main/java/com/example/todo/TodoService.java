@@ -42,11 +42,29 @@ public class TodoService implements TodoRepository {
         return todo;
     }
 
-    @Override 
-    public Todo addTodo(Todo todo){
+    @Override
+    public Todo addTodo(Todo todo) {
         todo.setId(uniqueId);
         todoList.put(uniqueId, todo);
         return todo;
+    }
+
+    @Override 
+    public Todo updateTodo(int id, Todo todo){
+        Todo existingTodo = todoList.get(id);
+        if (existingTodo == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        if (todo.getTodo() != null){
+            existingTodo.setTodo(todo.getTodo());
+        }
+        if (todo.getPriority() != null){
+            existingTodo.setPriority(todo.getPriority());
+        }
+        if (todo.getStatus() != null){
+            existingTodo.setStatus(todo.getStatus());
+        }
+        return existingTodo;
     }
 
 }
